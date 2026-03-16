@@ -42,7 +42,7 @@
 
         <br>
 
-        <a href="form.php" class="btn">Back to Form</a>
+        <a href="index.php" class="btn">Back to Form</a>
 
     </div>
 
