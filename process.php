@@ -1,16 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Form Result</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<div class="container">
-
-<h2 class="title">Application Result</h2>
-
 <?php
 
 $name = $_POST['name'];
@@ -21,64 +8,49 @@ $computer = $_POST['computer'];
 $reason = $_POST['reason'];
 $gender = $_POST['gender'];
 
-$error = false;
+$errors = [];
 
-if($name == ""){
-echo "<p class='error'>Name cannot be empty</p>";
-$error = true;
+if ($name == "") {
+    $errors[] = "Name cannot be empty";
 }
 
-if($matric == ""){
-echo "<p class='error'>Matric number cannot be empty</p>";
-$error = true;
+if ($matric == "") {
+    $errors[] = "Matric number cannot be empty";
 }
 
-if($age == ""){
-echo "<p class='error'>Age cannot be empty</p>";
-$error = true;
+if ($age == "") {
+    $errors[] = "Age cannot be empty";
 }
 
-if($date == ""){
-echo "<p class='error'>Date cannot be empty</p>";
-$error = true;
+if ($date == "") {
+    $errors[] = "Date cannot be empty";
 }
 
-if($computer == ""){
-echo "<p class='error'>Please select computer type</p>";
-$error = true;
+if ($computer == "") {
+    $errors[] = "Please select computer type";
 }
 
-if($reason == ""){
-echo "<p class='error'>Reason cannot be empty</p>";
-$error = true;
+if ($reason == "") {
+    $errors[] = "Reason cannot be empty";
 }
 
-if(strlen($reason) < 25){
-echo "<p class='error'>Reason must be at least 25 characters</p>";
-$error = true;
+if (strlen($reason) < 25) {
+    $errors[] = "Reason must be at least 25 characters";
 }
 
-if($error == false){
+if (count($errors) > 0) {
 
-echo "<p class='success'>Application Submitted Successfully</p>";
+    foreach ($errors as $error) {
+        echo "<p>$error</p>";
+    }
 
-echo "<p>Name: $name</p>";
-echo "<p>Matric: $matric</p>";
-echo "<p>Age: $age</p>";
-echo "<p>Date: $date</p>";
-echo "<p>Computer: $computer</p>";
-echo "<p>Gender: $gender</p>";
-echo "<p>Reason: $reason</p>";
+    echo "<br>";
+    echo "<a href='form.php'>Back to Form</a>";
+
+} else {
+
+    header("Location: result.php?name=$name&matric=$matric&age=$age&date=$date&computer=$computer&gender=$gender&reason=$reason");
 
 }
 
 ?>
-
-<br>
-
-<a href="form.php" class="link">Back to Form</a>
-
-</div>
-
-</body>
-</html>
