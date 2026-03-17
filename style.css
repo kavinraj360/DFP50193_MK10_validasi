@@ -1,40 +1,98 @@
 body {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #4facfe, #00f2fe);
     margin: 0;
+    padding: 0;
 }
 
 .container {
     width: 500px;
     margin: 50px auto;
-    background: white;
+    background: #ffffff;
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    text-align: center;
+    color: #007BFF;
+    margin-bottom: 25px;
 }
 
 .label {
     display: block;
-    margin-top: 10px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
 }
 
-.input {
+.input,
+.textarea,
+select {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
 .textarea {
-    width: 100%;
-    height: 80px;
+    height: 100px;
+    resize: none;
+}
+
+.option-group {
+    margin-top: 8px;
+    margin-bottom: 15px;
+}
+
+.radio,
+.check {
+    margin-right: 5px;
+    margin-left: 10px;
 }
 
 .btn {
+    display: inline-block;
     padding: 10px 20px;
+    margin-top: 15px;
+    margin-right: 10px;
     background: #007BFF;
     color: white;
     border: none;
+    border-radius: 8px;
+    text-decoration: none;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .btn:hover {
     background: #0056b3;
+}
+
+.btn-reset {
+    background: #6c757d;
+}
+
+.btn-reset:hover {
+    background: #495057;
+}
+
+p {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    background: #ffe5e5;
+    padding: 8px;
+    border-left: 4px solid red;
+    border-radius: 5px;
+    margin-bottom: 8px;
 }

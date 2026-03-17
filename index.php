@@ -37,21 +37,19 @@
             <textarea name="reason" class="textarea"></textarea>
 
             <label class="label">Gender</label>
-
-            <input type="radio" name="gender" value="Male" class="radio"> Male
-            <input type="radio" name="gender" value="Female" class="radio"> Female
-
-            <br><br>
+            <div class="option-group">
+                <input type="radio" name="gender" value="Male" class="radio"> Male
+                <input type="radio" name="gender" value="Female" class="radio"> Female
+            </div>
 
             <label class="label">Additional Items</label>
-
-            <input type="checkbox" name="software" value="Software" class="check"> Software
-            <input type="checkbox" name="printer" value="Printer" class="check"> Printer
-
-            <br><br>
+            <div class="option-group">
+                <input type="checkbox" name="software" value="Software" class="check"> Software
+                <input type="checkbox" name="printer" value="Printer" class="check"> Printer
+            </div>
 
             <input type="submit" value="Submit" class="btn">
-            <input type="reset" value="Reset" class="btn">
+            <input type="reset" value="Reset" class="btn btn-reset">
 
         </form>
 

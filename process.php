@@ -1,12 +1,15 @@
 <?php
+session_start();
 
-$name = $_POST['name'];
-$matric = $_POST['matric'];
-$age = $_POST['age'];
-$date = $_POST['date'];
-$computer = $_POST['computer'];
-$reason = $_POST['reason'];
-$gender = $_POST['gender'];
+$name = $_POST['name'] ?? "";
+$matric = $_POST['matric'] ?? "";
+$age = $_POST['age'] ?? "";
+$date = $_POST['date'] ?? "";
+$computer = $_POST['computer'] ?? "";
+$reason = $_POST['reason'] ?? "";
+$gender = $_POST['gender'] ?? "";
+$software = isset($_POST['software']) ? $_POST['software'] : "";
+$printer = isset($_POST['printer']) ? $_POST['printer'] : "";
 
 $errors = [];
 
@@ -32,25 +35,47 @@ if ($computer == "") {
 
 if ($reason == "") {
     $errors[] = "Reason cannot be empty";
-}
-
-if (strlen($reason) < 25) {
+} elseif (strlen($reason) < 25) {
     $errors[] = "Reason must be at least 25 characters";
 }
 
-if (count($errors) > 0) {
-
-    foreach ($errors as $error) {
-        echo "<p>$error</p>";
-    }
-
-    echo "<br>";
-    echo "<a href='form.php'>Back to Form</a>";
-
-} else {
-
-    header("Location: result.php?name=$name&matric=$matric&age=$age&date=$date&computer=$computer&gender=$gender&reason=$reason");
-
+if ($gender == "") {
+    $errors[] = "Please select gender";
 }
 
+if (count($errors) > 0) {
+    echo "<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Validation Error</title>
+        <link rel='stylesheet' href='style.css'>
+    </head>
+    <body>
+        <div class='container'>
+            <h2>Form Validation Error</h2>";
+
+    foreach ($errors as $error) {
+        echo "<p class='error'>$error</p>";
+    }
+
+    echo "<br>
+            <a href='index.php' class='btn'>Back to Form</a>
+        </div>
+    </body>
+    </html>";
+} else {
+    // Save into SESSION
+    $_SESSION['name'] = $name;
+    $_SESSION['matric'] = $matric;
+    $_SESSION['age'] = $age;
+    $_SESSION['date'] = $date;
+    $_SESSION['computer'] = $computer;
+    $_SESSION['reason'] = $reason;
+    $_SESSION['gender'] = $gender;
+    $_SESSION['software'] = $software;
+    $_SESSION['printer'] = $printer;
+
+    header("Location: result.php");
+    exit();
+}
 ?>
