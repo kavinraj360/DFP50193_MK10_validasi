@@ -4,14 +4,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Keputusan</title>
+    <title>Keputusan Permohonan</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <div class="container">
-
         <h2 class="header-title">Keputusan Permohonan</h2>
 
         <?php if (isset($_SESSION['error'])): ?>
@@ -22,16 +21,31 @@
         <?php elseif (isset($_SESSION['success'])): ?>
             <div class="success-msg">
                 <?php echo $_SESSION['success']; ?><br><br>
-                Nama: <b>
-                    <?php echo $_SESSION['nama']; ?>
-                </b>
+
+                <b>Nama:</b>
+                <?php echo $_SESSION['nama']; ?><br>
+                <b>No Matrik:</b>
+                <?php echo $_SESSION['no_matrik']; ?><br>
+                <b>Semester:</b>
+                <?php echo $_SESSION['semester']; ?><br>
+                <b>Tarikh:</b>
+                <?php echo $_SESSION['tarikh']; ?><br>
+                <b>Jabatan:</b>
+                <?php echo $_SESSION['jabatan']; ?><br>
+                <b>Spesifikasi:</b>
+                <?php echo $_SESSION['specs']; ?><br>
+                <b>Perisian:</b>
+                <?php echo implode(", ", $_SESSION['software']); ?><br>
+                <b>Alasan:</b>
+                <?php echo $_SESSION['alasan']; ?><br>
+                <b>Pengesahan:</b>
+                <?php echo $_SESSION['pengesahan'] == 'yes' ? 'Disahkan' : 'Tidak Disahkan'; ?>
             </div>
         <?php endif; ?>
 
         <div class="nav-link">
-            <a href="index.php" class="link-back">Kembali</a>
+            <a href="index.php" class="link-back">Kembali ke Borang</a>
         </div>
-
     </div>
 
 </body>
