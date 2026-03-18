@@ -22,50 +22,31 @@
             $alasan = trim($_POST['alasan'] ?? '');
             $pengesahan = trim($_POST['pengesahan'] ?? '');
 
-            $ralat = [];
-
-            // Validation guna if + elseif
+            // Chain validation
             if ($nama == '') {
-                $ralat[] = "Nama Penuh mesti diisi.";
-            }
+                echo "<div class='error-box'>Nama Penuh mesti diisi.</div>";
 
-            if ($tel == '') {
-                $ralat[] = "No. Telephone mesti diisi.";
-            }
+            } elseif ($tel == '') {
+                echo "<div class='error-box'>No. Telephone mesti diisi.</div>";
 
-            if ($tarikh == '') {
-                $ralat[] = "Tarikh Permohonan mesti diisi.";
-            }
+            } elseif ($tarikh == '') {
+                echo "<div class='error-box'>Tarikh Permohonan mesti diisi.</div>";
 
-            if ($program == '') {
-                $ralat[] = "Program Pengajian mesti dipilih.";
-            }
+            } elseif ($program == '') {
+                echo "<div class='error-box'>Program Pengajian mesti dipilih.</div>";
 
-            if ($jantina == '') {
-                $ralat[] = "Jantina mesti dipilih.";
-            }
+            } elseif ($jantina == '') {
+                echo "<div class='error-box'>Jantina mesti dipilih.</div>";
 
-            if ($pengesahan == '') {
-                $ralat[] = "Anda mesti menanda kotak pengesahan.";
-            }
+            } elseif ($pengesahan == '') {
+                echo "<div class='error-box'>Anda mesti menanda kotak pengesahan.</div>";
 
-            // Alasan (guna elseif sebab berkait)
-            if ($alasan == '') {
-                $ralat[] = "Alasan Sokongan mesti diisi.";
+            } elseif ($alasan == '') {
+                echo "<div class='error-box'>Alasan Sokongan mesti diisi.</div>";
+
             } elseif (strlen($alasan) < 25) {
-                $ralat[] = "Alasan mestilah sekurang-kurangnya 25 aksara.";
-            }
+                echo "<div class='error-box'>Alasan mestilah sekurang-kurangnya 25 aksara.</div>";
 
-            // Output
-            if (!empty($ralat)) {
-                echo "<div class='error-box'>";
-                echo "<strong>Permohonan Tidak Berjaya:</strong><br><br>";
-
-                foreach ($ralat as $mesej) {
-                    echo "- " . htmlspecialchars($mesej) . "<br>";
-                }
-
-                echo "</div>";
             } else {
                 echo "<div class='success-box'>";
                 echo "<strong>Permohonan Berjaya Disemak!</strong><br><br>";
@@ -76,7 +57,7 @@
         } else {
             echo "<p class='error-box'>Sila hantar borang terlebih dahulu.</p>";
         }
-    
+        
         ?>
 
         <a href="index.php" class="back-link">&laquo; Kembali ke Halaman Permohonan</a>
