@@ -12,7 +12,7 @@
     <div class="container">
         <h2 class="header-title">Borang Permohonan Laptop</h2>
 
-        <form action="process.php" method="POST">
+        <form action="proses.php" method="POST">
 
             <label>Nama:</label>
             <input type="text" name="nama" class="input-control">
