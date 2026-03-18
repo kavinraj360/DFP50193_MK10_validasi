@@ -1,52 +1,64 @@
-<!DOCTYPE html>
-<html lang="ms">
-<head>
-    <meta charset="UTF-8">
-    <title>Status Pemprosesan</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container-utama">
-        <h2 class="tajuk-borang">Status Permohonan</h2>
+<?php
+session_start();
 
-        <?php
-        if (isset($_POST['hantar'])) {
-            // Menetapkan input kepada pemboleh ubah spesifik
-            $nama = $_POST['nama'];
-            $umur = $_POST['umur'];
-            $tarikh = $_POST['tarikh'];
-            $jabatan = $_POST['jabatan'];
-            $specs = isset($_POST['specs']) ? $_POST['specs'] : "";
-            $alasan = $_POST['alasan'];
-            
-            $errors = [];
+if (isset($_POST['hantar'])) {
 
-            // 1. Semak jika input kosong
-            if (empty($nama)) $errors[] = "Nama tidak boleh dibiarkan kosong.";
-            if (empty($umur)) $errors[] = "Umur tidak boleh dibiarkan kosong.";
-            if (empty($tarikh)) $errors[] = "Tarikh tidak boleh dibiarkan kosong.";
-            if (empty($jabatan)) $errors[] = "Sila pilih jabatan anda.";
-            if (empty($specs)) $errors[] = "Sila pilih spesifikasi peranti.";
-            
-            // 2. Semak panjang alasan (mesti >= 25 aksara)
-            if (strlen($alasan) < 25) {
-                $errors[] = "Alasan permohonan mestilah sekurang-kurangnya 25 aksara.";
-            }
+    $nama = trim($_POST['nama'] ?? '');
+    $umur = trim($_POST['umur'] ?? '');
+    $tarikh = trim($_POST['tarikh'] ?? '');
+    $jabatan = trim($_POST['jabatan'] ?? '');
+    $specs = trim($_POST['specs'] ?? '');
+    $extra = $_POST['extra'] ?? [];
+    $alasan = trim($_POST['alasan'] ?? '');
 
-            // Paparkan ralat jika ada
-            if (!empty($errors)) {
-                foreach ($errors as $ralat) {
-                    echo "<p class='ralat-teks'>⚠️ $ralat</p>";
-                }
-            } else {
-                echo "<p style='color: green; font-weight: bold;'>Permohonan berjaya dihantar untuk semakan!</p>";
-                echo "<strong>Nama:</strong> $nama <br>";
-                echo "<strong>Jabatan:</strong> $jabatan";
-            }
-        }
-        ?>
+    $errors = [];
 
-        <a href="borang.php" class="pautan-kembali">← Kembali ke Borang Permohonan</a>
-    </div>
-</body>
-</html>
+    if ($nama == '') {
+        $errors[] = "Nama penuh tidak boleh kosong.";
+    }
+
+    if ($umur == '') {
+        $errors[] = "Umur tidak boleh kosong.";
+    }
+
+    if ($tarikh == '') {
+        $errors[] = "Tarikh mohon tidak boleh kosong.";
+    }
+
+    if ($jabatan == '') {
+        $errors[] = "Sila pilih jabatan.";
+    }
+
+    if ($specs == '') {
+        $errors[] = "Sila pilih spesifikasi diperlukan.";
+    }
+
+    if ($alasan == '') {
+        $errors[] = "Alasan sokongan tidak boleh kosong.";
+    } elseif (strlen($alasan) < 25) {
+        $errors[] = "Alasan sokongan mestilah sekurang-kurangnya 25 aksara.";
+    }
+
+    if (!empty($errors)) {
+        $_SESSION['errors'] = $errors;
+        header("Location: result.php");
+        exit();
+    }
+
+    $_SESSION['nama'] = $nama;
+    $_SESSION['umur'] = $umur;
+    $_SESSION['tarikh'] = $tarikh;
+    $_SESSION['jabatan'] = $jabatan;
+    $_SESSION['specs'] = $specs;
+    $_SESSION['extra'] = $extra;
+    $_SESSION['alasan'] = $alasan;
+    $_SESSION['success'] = true;
+
+    header("Location: result.php");
+    exit();
+
+} else {
+    header("Location: borang.php");
+    exit();
+}
+?>

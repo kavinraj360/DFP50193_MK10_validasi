@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="ms">
-
 <head>
     <meta charset="UTF-8">
-    <title>Permohonan Pinjaman Komputer Riba</title>
+    <title>Skim Pinjaman Komputer Riba</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<body class="form-page">
 
-<body>
-    <div class="container-utama">
-        <h2 class="tajuk-borang">Skim Pinjaman Komputer Riba</h2>
+<div class="wrapper">
+    <div class="form-card">
+        <h1>Skim Pinjaman Komputer Riba</h1>
+
         <form action="proses.php" method="POST">
 
-            <div class="group-input">
-                <label class="label-teks">Nama Penuh:</label>
-                <input type="text" name="nama" class="input-teks">
+            <div class="form-group">
+                <label>Nama Penuh</label>
+                <input type="text" name="nama" required>
             </div>
 
-            <div class="group-input">
-                <label class="label-teks">Umur:</label>
-                <input type="number" name="umur" class="input-teks">
+            <div class="form-group">
+                <label>Umur</label>
+                <input type="number" name="umur" required>
             </div>
 
-            <div class="group-input">
-                <label class="label-teks">Tarikh Mohon:</label>
-                <input type="date" name="tarikh" class="input-teks">
+            <div class="form-group">
+                <label>Tarikh Mohon</label>
+                <input type="date" name="tarikh" required>
             </div>
 
-            <div class="group-input">
-                <label class="label-teks">Jabatan:</label>
-                <select name="jabatan" class="input-pilihan">
+            <div class="form-group">
+                <label>Jabatan</label>
+                <select name="jabatan" required>
                     <option value="">-- Sila Pilih --</option>
                     <option value="JTMK">JTMK</option>
                     <option value="JKE">JKE</option>
@@ -37,30 +38,43 @@
                 </select>
             </div>
 
-            <div class="group-input">
-                <label class="label-teks">Spesifikasi Diperlukan:</label>
-                <input type="radio" name="specs" value="Basic" class="radio-item"> Basic
-                <input type="radio" name="specs" value="High-End" class="radio-item"> High-End
+            <div class="form-group">
+                <label>Spesifikasi Diperlukan</label>
+                <div class="option-row">
+                    <label class="inline-option">
+                        <input type="radio" name="specs" value="Basic" required> Basic
+                    </label>
+                    <label class="inline-option">
+                        <input type="radio" name="specs" value="High-End"> High-End
+                    </label>
+                </div>
             </div>
 
-            <div class="group-input">
-                <label class="label-teks">Peranti Tambahan:</label>
-                <input type="checkbox" name="extra[]" value="Mouse" class="check-item"> Tetikus
-                <input type="checkbox" name="extra[]" value="Bag" class="check-item"> Beg Laptop
+            <div class="form-group">
+                <label>Peranti Tambahan</label>
+                <div class="option-row">
+                    <label class="inline-option">
+                        <input type="checkbox" name="extra[]" value="Tetikus"> Tetikus
+                    </label>
+                    <label class="inline-option">
+                        <input type="checkbox" name="extra[]" value="Beg Laptop"> Beg Laptop
+                    </label>
+                </div>
             </div>
 
-            <div class="group-input">
-                <label class="label-teks">Alasan Sokongan (Min 25 aksara):</label>
-                <textarea name="alasan" class="input-kawasan" rows="4"></textarea>
+            <div class="form-group">
+                <label>Alasan Sokongan (Min 25 aksara)</label>
+                <textarea name="alasan" rows="4" required></textarea>
             </div>
 
-            <div class="group-input">
-                <button type="submit" name="hantar" class="warna-warni-btn btn-hantar">Hantar Permohonan</button>
-                <button type="reset" class="warna-warni-btn btn-semula">Tetap Semula</button>
+            <div class="button-group">
+                <button type="submit" name="hantar" class="btn btn-submit">Hantar Permohonan</button>
+                <button type="reset" class="btn btn-reset">Tetap Semula</button>
             </div>
 
         </form>
     </div>
-</body>
+</div>
 
+</body>
 </html>
