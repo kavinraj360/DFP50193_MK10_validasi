@@ -1,71 +1,53 @@
 <!DOCTYPE html>
 <html lang="ms">
+
 <head>
     <meta charset="UTF-8">
-    <title>Permohonan Skim Pinjaman Komputer Riba</title>
+    <title>Borang Permohonan</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <div class="container">
-        <h2 class="header-title">Borang Permohonan Pinjaman Komputer Riba</h2>
-        <form action="process.php" method="POST" class="form-main">
-            
-            <div class="form-group">
-                <label>Nama Penuh:</label>
-                <input type="text" name="nama" class="input-control">
-            </div>
+        <h2 class="header-title">Borang Permohonan Laptop</h2>
 
-            <div class="form-group">
-                <label>Nombor Matrik:</label>
-                <input type="text" name="no_matrik" class="input-control">
-            </div>
+        <form action="process.php" method="POST">
 
-            <div class="form-group">
-                <label>Semester:</label>
-                <input type="number" name="semester" class="input-control">
-            </div>
+            <label>Nama:</label>
+            <input type="text" name="nama" class="input-control">
 
-            <div class="form-group">
-                <label>Tarikh Permohonan:</label>
-                <input type="date" name="tarikh" class="input-control">
-            </div>
+            <label>No Telefon:</label>
+            <input type="text" name="tel" class="input-control">
 
-            <div class="form-group">
-                <label>Jabatan:</label>
-                <select name="jabatan" class="select-control">
-                    <option value="">-- Sila Pilih --</option>
-                    <option value="JTMK">JTMK</option>
-                    <option value="JKE">JKE</option>
-                    <option value="JKM">JKM</option>
-                </select>
-            </div>
+            <label>Tarikh:</label>
+            <input type="date" name="tarikh" class="input-control">
 
-            <div class="form-group">
-                <label>Spesifikasi Diperlukan:</label>
-                <div class="radio-group">
-                    <input type="radio" name="specs" value="Standard" class="radio-input"> Standard
-                    <input type="radio" name="specs" value="High-End" class="radio-input"> High-End
-                </div>
-            </div>
+            <label>Program:</label>
+            <select name="program" class="input-control">
+                <option value="">Pilih</option>
+                <option value="IT">IT</option>
+                <option value="Business">Business</option>
+            </select>
 
-            <div class="form-group">
-                <label>Perisian Tambahan:</label>
-                <div class="checkbox-group">
-                    <input type="checkbox" name="software[]" value="Office" class="check-input"> MS Office
-                    <input type="checkbox" name="software[]" value="Adobe" class="check-input"> Adobe Suite
-                </div>
-            </div>
+            <label>Jantina:</label>
+            <input type="radio" name="jantina" value="Lelaki"> Lelaki
+            <input type="radio" name="jantina" value="Perempuan"> Perempuan
 
-            <div class="form-group">
-                <label>Alasan Sokongan (Min 25 aksara):</label>
-                <textarea name="alasan" class="textarea-control" rows="4"></textarea>
-            </div>
+            <label>Alasan:</label>
+            <textarea name="alasan" class="input-control"></textarea>
 
-            <div class="button-group">
-                <button type="submit" name="submit" class="btn-submit">Hantar</button>
-                <button type="reset" class="btn-reset">Tetap Semula</button>
-            </div>
+            <label>
+                <input type="checkbox" name="pengesahan" value="yes">
+                Saya setuju
+            </label>
+
+            <br><br>
+            <button type="submit" class="btn-submit">Hantar</button>
+
         </form>
     </div>
+
 </body>
+
 </html>

@@ -1,69 +1,47 @@
-<!DOCTYPE html>
-<html lang="ms">
+<?php
+session_start();
 
-<head>
-    <meta charset="UTF-8">
-    <title>Status Pemprosesan Permohonan</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+// ambil data
+$_SESSION['nama'] = trim($_POST['nama'] ?? '');
+$_SESSION['tel'] = trim($_POST['tel'] ?? '');
+$_SESSION['tarikh'] = trim($_POST['tarikh'] ?? '');
+$_SESSION['program'] = trim($_POST['program'] ?? '');
+$_SESSION['jantina'] = trim($_POST['jantina'] ?? '');
+$_SESSION['alasan'] = trim($_POST['alasan'] ?? '');
+$_SESSION['pengesahan'] = trim($_POST['pengesahan'] ?? '');
 
-<body class="page-body">
+// VALIDATION (1 chain sahaja)
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    $_SESSION['error'] = "Sila hantar borang dahulu";
 
-    <div class="form-container">
-        <h2 class="page-title">Semakan Permohonan</h2>
+} elseif ($_SESSION['nama'] == '') {
+    $_SESSION['error'] = "Nama tidak diisi";
 
-        <?php
+} elseif ($_SESSION['tel'] == '') {
+    $_SESSION['error'] = "No telefon tidak diisi";
 
-        // Ambil input
-        $nama = trim($_POST['nama'] ?? '');
-        $tel = trim($_POST['tel'] ?? '');
-        $tarikh = trim($_POST['tarikh'] ?? '');
-        $program = trim($_POST['program'] ?? '');
-        $jantina = trim($_POST['jantina'] ?? '');
-        $alasan = trim($_POST['alasan'] ?? '');
-        $pengesahan = trim($_POST['pengesahan'] ?? '');
+} elseif ($_SESSION['tarikh'] == '') {
+    $_SESSION['error'] = "Tarikh tidak diisi";
 
-        // SATU chain sahaja
-        if ($_SERVER["REQUEST_METHOD"] != "POST") {
-            echo "<p class='error-box'>Sila hantar borang permohonan terlebih dahulu.</p>";
+} elseif ($_SESSION['program'] == '') {
+    $_SESSION['error'] = "Program tidak dipilih";
 
-        } elseif ($nama == '') {
-            echo "<div class='error-box'>Nama Penuh mesti diisi.</div>";
+} elseif ($_SESSION['jantina'] == '') {
+    $_SESSION['error'] = "Jantina tidak dipilih";
 
-        } elseif ($tel == '') {
-            echo "<div class='error-box'>No. Telephone mesti diisi.</div>";
+} elseif ($_SESSION['pengesahan'] == '') {
+    $_SESSION['error'] = "Sila tandakan pengesahan";
 
-        } elseif ($tarikh == '') {
-            echo "<div class='error-box'>Tarikh Permohonan mesti diisi.</div>";
+} elseif ($_SESSION['alasan'] == '') {
+    $_SESSION['error'] = "Alasan tidak diisi";
 
-        } elseif ($program == '') {
-            echo "<div class='error-box'>Program Pengajian mesti dipilih.</div>";
+} elseif (strlen($_SESSION['alasan']) < 25) {
+    $_SESSION['error'] = "Alasan mesti lebih 25 aksara";
 
-        } elseif ($jantina == '') {
-            echo "<div class='error-box'>Jantina mesti dipilih.</div>";
+} else {
+    $_SESSION['success'] = "Permohonan berjaya!";
+}
 
-        } elseif ($pengesahan == '') {
-            echo "<div class='error-box'>Anda mesti menanda kotak pengesahan.</div>";
-
-        } elseif ($alasan == '') {
-            echo "<div class='error-box'>Alasan Sokongan mesti diisi.</div>";
-
-        } elseif (strlen($alasan) < 25) {
-            echo "<div class='error-box'>Alasan mestilah sekurang-kurangnya 25 aksara.</div>";
-
-        } else {
-            echo "<div class='success-box'>";
-            echo "<strong>Permohonan Berjaya Disemak!</strong><br><br>";
-            echo "Terima kasih, <strong>" . htmlspecialchars($nama) . "</strong>. Permohonan anda akan disemak oleh pengurusan.";
-            echo "</div>";
-        }
-
-        ?>
-
-        <br>
-        <a href="index.php" class="back-link">&laquo; Kembali ke Halaman Permohonan</a>
-    </div>
-
-</body>
-
-</html>
+// redirect ke view
+header("Location: result.php");
+exit;
