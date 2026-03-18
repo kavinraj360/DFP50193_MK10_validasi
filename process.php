@@ -1,81 +1,52 @@
-<?php
-session_start();
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <title>Status Pemprosesan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-utama">
+        <h2 class="tajuk-borang">Status Permohonan</h2>
 
-$name = $_POST['name'] ?? "";
-$matric = $_POST['matric'] ?? "";
-$age = $_POST['age'] ?? "";
-$date = $_POST['date'] ?? "";
-$computer = $_POST['computer'] ?? "";
-$reason = $_POST['reason'] ?? "";
-$gender = $_POST['gender'] ?? "";
-$software = isset($_POST['software']) ? $_POST['software'] : "";
-$printer = isset($_POST['printer']) ? $_POST['printer'] : "";
+        <?php
+        if (isset($_POST['hantar'])) {
+            // Menetapkan input kepada pemboleh ubah spesifik
+            $nama = $_POST['nama'];
+            $umur = $_POST['umur'];
+            $tarikh = $_POST['tarikh'];
+            $jabatan = $_POST['jabatan'];
+            $specs = isset($_POST['specs']) ? $_POST['specs'] : "";
+            $alasan = $_POST['alasan'];
+            
+            $errors = [];
 
-$errors = [];
+            // 1. Semak jika input kosong
+            if (empty($nama)) $errors[] = "Nama tidak boleh dibiarkan kosong.";
+            if (empty($umur)) $errors[] = "Umur tidak boleh dibiarkan kosong.";
+            if (empty($tarikh)) $errors[] = "Tarikh tidak boleh dibiarkan kosong.";
+            if (empty($jabatan)) $errors[] = "Sila pilih jabatan anda.";
+            if (empty($specs)) $errors[] = "Sila pilih spesifikasi peranti.";
+            
+            // 2. Semak panjang alasan (mesti >= 25 aksara)
+            if (strlen($alasan) < 25) {
+                $errors[] = "Alasan permohonan mestilah sekurang-kurangnya 25 aksara.";
+            }
 
-if ($name == "") {
-    $errors[] = "Name cannot be empty";
-}
+            // Paparkan ralat jika ada
+            if (!empty($errors)) {
+                foreach ($errors as $ralat) {
+                    echo "<p class='ralat-teks'>⚠️ $ralat</p>";
+                }
+            } else {
+                echo "<p style='color: green; font-weight: bold;'>Permohonan berjaya dihantar untuk semakan!</p>";
+                echo "<strong>Nama:</strong> $nama <br>";
+                echo "<strong>Jabatan:</strong> $jabatan";
+            }
+        }
+        ?>
 
-if ($matric == "") {
-    $errors[] = "Matric number cannot be empty";
-}
-
-if ($age == "") {
-    $errors[] = "Age cannot be empty";
-}
-
-if ($date == "") {
-    $errors[] = "Date cannot be empty";
-}
-
-if ($computer == "") {
-    $errors[] = "Please select computer type";
-}
-
-if ($reason == "") {
-    $errors[] = "Reason cannot be empty";
-} elseif (strlen($reason) < 25) {
-    $errors[] = "Reason must be at least 25 characters";
-}
-
-if ($gender == "") {
-    $errors[] = "Please select gender";
-}
-
-if (count($errors) > 0) {
-    echo "<!DOCTYPE html>
-    <html>
-    <head>
-        <title>Validation Error</title>
-        <link rel='stylesheet' href='style.css'>
-    </head>
-    <body>
-        <div class='container'>
-            <h2>Form Validation Error</h2>";
-
-    foreach ($errors as $error) {
-        echo "<p class='error'>$error</p>";
-    }
-
-    echo "<br>
-            <a href='index.php' class='btn'>Back to Form</a>
-        </div>
-    </body>
-    </html>";
-} else {
-    // Save into SESSION
-    $_SESSION['name'] = $name;
-    $_SESSION['matric'] = $matric;
-    $_SESSION['age'] = $age;
-    $_SESSION['date'] = $date;
-    $_SESSION['computer'] = $computer;
-    $_SESSION['reason'] = $reason;
-    $_SESSION['gender'] = $gender;
-    $_SESSION['software'] = $software;
-    $_SESSION['printer'] = $printer;
-
-    header("Location: result.php");
-    exit();
-}
-?>
+        <a href="borang.php" class="pautan-kembali">← Kembali ke Borang Permohonan</a>
+    </div>
+</body>
+</html>
